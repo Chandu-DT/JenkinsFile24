@@ -10,5 +10,10 @@ pipeline {
                git branch: 'main', credentialsId: 'jenkins', url: 'https://github.com/ksrepo9/ks.git' 
             }
         }
+        stage('list') {
+            steps {
+               sh 'ls -l' 
+            }
+        }
     }
 }
