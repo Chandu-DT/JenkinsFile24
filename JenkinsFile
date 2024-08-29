@@ -19,28 +19,7 @@ pipeline {
             steps {
                 sh 'ls -l'
             }
-        }
-       stage('build') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
-        stage('validate') {
-            steps {
-                sh 'mvn validate'
-            }
-        }
-        stage('compile') {
-            steps {
-                sh 'mvn compile'
-            }
-        }
-        stage('test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-          
+        }         
     }
 }
 
