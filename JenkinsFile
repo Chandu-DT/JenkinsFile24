@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('git clone') {
             steps {
-                git credentialsId: 'jenkins', url: ' https://github.com/ksrepo9/ks.git'
+                git credentialsId: 'jenkins', url: 'https://github.com/shashirajraja/onlinebookstore.git'
             }
         }
         stage('maven') {
