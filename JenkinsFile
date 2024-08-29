@@ -36,24 +36,6 @@ pipeline {
             }
         }
           
-        stage('sonar') {
-            steps {
-                sh 'mvn sonar:sonar \
-  -Dsonar.projectKey=chandu \
-  -Dsonar.host.url=http://13.60.59.113:9000 \
-  -Dsonar.login=c548c469ad24cfa409f97f0b02a4d8243a22afbb'
-            }
-        }
-        stage('build') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
-       stage('nexus') {
-            steps {
-                nexusArtifactUploader artifacts: [[artifactId: 'onlinebookstore', classifier: '', file: 'target/onlinebookstore.war', type: 'war']], credentialsId: 'nexus', groupId: 'onlinebookstore', nexusUrl: '13.49.69.177:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '0.0.1-SNAPSHOT'
-            }
-        }
     }
 }
 
