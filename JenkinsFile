@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+       tools {
+        maven 'Apache Maven 3.9.9'
+    }
+
+    stages {
+        stage('git clone') {
+            steps {
+                git credentialsId: 'jenkins', url: ' https://github.com/ksrepo9/ks.git'
+            }
+        }
+        stage('maven') {
+            steps {
+                sh 'mvn --version'
+            }
+        }
+        stage('list') {
+            steps {
+                sh 'ls -l'
+            }
+        }
+        stage('validate') {
+            steps {
+                sh 'mvn validate'
+            }
+        }
+        stage('compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+    }
+}
+
