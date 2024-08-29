@@ -1,8 +1,8 @@
 pipeline {
-    agent any
+       agent {node 'ansible'}
        tools {
-        maven 'Apache Maven 3.9.9'
-    }
+             maven 'Apache Maven 3.9.9'   
+      }
 
     stages {
         stage('git clone') {
