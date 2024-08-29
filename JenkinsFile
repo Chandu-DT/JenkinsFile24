@@ -1,18 +1,45 @@
 pipeline {
-    agent any
-        tools {
-           maven 'Apache Maven 3.9.9'
-    }
-
+       agent {node 'ansible'}
+       tools {
+             maven 'Apache Maven 3.9.9'   
+      }
     stages {
         stage('git clone') {
             steps {
-               git branch: 'main', credentialsId: 'jenkins', url: 'https://github.com/ksrepo9/ks.git' 
+                git credentialsId: 'jenkins', url: ' https://github.com/ksrepo9/ks.git'
+            }
+        }
+        stage('maven') {
+            steps {
+                sh 'mvn --version'
             }
         }
         stage('list') {
             steps {
-               sh 'ls -l' 
+                sh 'ls -l'
+            }
+        }
+        stage('validate') {
+            steps {
+                sh 'mvn validate'
+            }
+        }
+        stage('compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('sonar') {
+            steps {
+                sh 'mvn sonar:sonar \
+  -Dsonar.projectKey=chandu \
+  -Dsonar.host.url=http://13.60.59.113:9000 \
+  -Dsonar.login=c548c469ad24cfa409f97f0b02a4d8243a22afbb'
             }
         }
     }
