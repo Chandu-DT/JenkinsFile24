@@ -35,6 +35,14 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage('sonar') {
+            steps {
+                sh 'mvn sonar:sonar \
+  -Dsonar.projectKey=chandu \
+  -Dsonar.host.url=http://13.60.59.113:9000 \
+  -Dsonar.login=c548c469ad24cfa409f97f0b02a4d8243a22afbb'
+            }
+        }
     }
 }
 
